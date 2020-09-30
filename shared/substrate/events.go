@@ -126,7 +126,7 @@ const (
 	Btc     Currency = 4
 	Eos     Currency = 5
 )
-// EventBa
+// EventBalancesTransfer is emitted when a Substrate client calls Currency::transfer.
 type EventBalancesTransfer struct {
 	Phase    types.Phase
 	From     types.AccountID
