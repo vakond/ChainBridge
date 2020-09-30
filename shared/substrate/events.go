@@ -6,6 +6,8 @@ package utils
 import (
 	events "github.com/ChainSafe/chainbridge-substrate-events"
 	"github.com/centrifuge/go-substrate-rpc-client/types"
+
+	"github.com/ChainSafe/ChainBridge/shared/equilibrium"
 )
 
 type EventErc721Minted struct {
@@ -117,25 +119,6 @@ type EventMultisigCancelled struct {
 	Topics    []types.Hash
 }
 
-type Currency byte
-const (
-	Unknown Currency = 0
-	Usd     Currency = 1
-	Eq      Currency = 2
-	Eth     Currency = 3
-	Btc     Currency = 4
-	Eos     Currency = 5
-)
-// EventBalancesTransfer is emitted when a Substrate client calls Currency::transfer.
-type EventBalancesTransfer struct {
-	Phase    types.Phase
-	From     types.AccountID
-	To       types.AccountID
-	Currency Currency
-	Value    types.U64
-	Topics   []types.Hash
-}
-
 type Events struct {
 	types.EventRecords
 	events.Events
@@ -159,5 +142,5 @@ type Events struct {
 	MultiAccount_MultisigApproval    []EventMultisigApproval               // nolint:stylecheck,golint
 	MultiAccount_MultisigExecuted    []EventMultisigExecuted               // nolint:stylecheck,golint
 	MultiAccount_MultisigCancelled   []EventMultisigCancelled              // nolint:stylecheck,golint
-	Balances_Transfer                []EventBalancesTransfer               // nolint:stylecheck,golint
+	Balances_Transfer                []equilibrium.EventBalancesTransfer   // nolint:stylecheck,golint
 }
