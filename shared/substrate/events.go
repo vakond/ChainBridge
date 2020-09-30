@@ -117,27 +117,47 @@ type EventMultisigCancelled struct {
 	Topics    []types.Hash
 }
 
+type Currency byte
+const (
+	Unknown Currency = 0
+	Usd     Currency = 1
+	Eq      Currency = 2
+	Eth     Currency = 3
+	Btc     Currency = 4
+	Eos     Currency = 5
+)
+// EventBa
+type EventBalancesTransfer struct {
+	Phase    types.Phase
+	From     types.AccountID
+	To       types.AccountID
+	Currency Currency
+	Value    types.U64
+	Topics   []types.Hash
+}
+
 type Events struct {
 	types.EventRecords
 	events.Events
-	Erc721_Minted                    []EventErc721Minted                   //nolint:stylecheck,golint
-	Erc721_Transferred               []EventErc721Transferred              //nolint:stylecheck,golint
-	Erc721_Burned                    []EventErc721Burned                   //nolint:stylecheck,golint
-	Example_Remark                   []EventExampleRemark                  //nolint:stylecheck,golint
-	Nfts_DepositAsset                []EventNFTDeposited                   //nolint:stylecheck,golint
-	Council_Proposed                 []types.EventCollectiveProposed       //nolint:stylecheck,golint
-	Council_Voted                    []types.EventCollectiveVoted          //nolint:stylecheck,golint
-	Council_Approved                 []types.EventCollectiveApproved       //nolint:stylecheck,golint
-	Council_Disapproved              []types.EventCollectiveDisapproved    //nolint:stylecheck,golint
-	Council_Executed                 []types.EventCollectiveExecuted       //nolint:stylecheck,golint
-	Council_MemberExecuted           []types.EventCollectiveMemberExecuted //nolint:stylecheck,golint
-	Council_Closed                   []types.EventCollectiveClosed         //nolint:stylecheck,golint
-	Fees_FeeChanged                  []EventFeeChanged                     //nolint:stylecheck,golint
-	MultiAccount_NewMultiAccount     []EventNewMultiAccount                //nolint:stylecheck,golint
-	MultiAccount_MultiAccountUpdated []EventMultiAccountUpdated            //nolint:stylecheck,golint
-	MultiAccount_MultiAccountRemoved []EventMultiAccountRemoved            //nolint:stylecheck,golint
-	MultiAccount_NewMultisig         []EventNewMultisig                    //nolint:stylecheck,golint
-	MultiAccount_MultisigApproval    []EventMultisigApproval               //nolint:stylecheck,golint
-	MultiAccount_MultisigExecuted    []EventMultisigExecuted               //nolint:stylecheck,golint
-	MultiAccount_MultisigCancelled   []EventMultisigCancelled              //nolint:stylecheck,golint
+	Erc721_Minted                    []EventErc721Minted                   // nolint:stylecheck,golint
+	Erc721_Transferred               []EventErc721Transferred              // nolint:stylecheck,golint
+	Erc721_Burned                    []EventErc721Burned                   // nolint:stylecheck,golint
+	Example_Remark                   []EventExampleRemark                  // nolint:stylecheck,golint
+	Nfts_DepositAsset                []EventNFTDeposited                   // nolint:stylecheck,golint
+	Council_Proposed                 []types.EventCollectiveProposed       // nolint:stylecheck,golint
+	Council_Voted                    []types.EventCollectiveVoted          // nolint:stylecheck,golint
+	Council_Approved                 []types.EventCollectiveApproved       // nolint:stylecheck,golint
+	Council_Disapproved              []types.EventCollectiveDisapproved    // nolint:stylecheck,golint
+	Council_Executed                 []types.EventCollectiveExecuted       // nolint:stylecheck,golint
+	Council_MemberExecuted           []types.EventCollectiveMemberExecuted // nolint:stylecheck,golint
+	Council_Closed                   []types.EventCollectiveClosed         // nolint:stylecheck,golint
+	Fees_FeeChanged                  []EventFeeChanged                     // nolint:stylecheck,golint
+	MultiAccount_NewMultiAccount     []EventNewMultiAccount                // nolint:stylecheck,golint
+	MultiAccount_MultiAccountUpdated []EventMultiAccountUpdated            // nolint:stylecheck,golint
+	MultiAccount_MultiAccountRemoved []EventMultiAccountRemoved            // nolint:stylecheck,golint
+	MultiAccount_NewMultisig         []EventNewMultisig                    // nolint:stylecheck,golint
+	MultiAccount_MultisigApproval    []EventMultisigApproval               // nolint:stylecheck,golint
+	MultiAccount_MultisigExecuted    []EventMultisigExecuted               // nolint:stylecheck,golint
+	MultiAccount_MultisigCancelled   []EventMultisigCancelled              // nolint:stylecheck,golint
+	Balances_Transfer                []EventBalancesTransfer               // nolint:stylecheck,golint
 }

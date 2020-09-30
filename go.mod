@@ -2,10 +2,8 @@ module github.com/ChainSafe/ChainBridge
 
 go 1.13
 
-replace github.com/ChainSafe/chainbridge-substrate-events => github.com/vakond/chainbridge-substrate-events v0.0.0-20200715141113-87198532025e
-
 require (
-    github.com/ChainSafe/chainbridge-substrate-events v0.0.0-20200715141113-87198532025e
+	github.com/ChainSafe/chainbridge-substrate-events v0.0.0-20200715141113-87198532025e
 	github.com/ChainSafe/chainbridge-utils v1.0.2
 	github.com/ChainSafe/log15 v1.0.0
 	github.com/aristanetworks/goarista v0.0.0-20200609010056-95bcf8053598 // indirect
