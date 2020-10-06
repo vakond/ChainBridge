@@ -122,6 +122,12 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 		Nonce:       types.NewUCompactFromUInt(uint64(c.nonce)),
 		SpecVersion: rv.SpecVersion,
 		Tip:         types.NewUCompactFromUInt(0),
+		TransactionVersion: 1,
+	}
+
+	err = printBinaryPayload(&ext, *c.key, o)
+	if err != nil {
+		return err
 	}
 
 	err = ext.Sign(*c.key, o)
@@ -141,6 +147,53 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 	defer sub.Unsubscribe()
 
 	return c.watchSubmission(sub)
+}
+
+func printBinaryPayload(e *types.Extrinsic, signer signature.KeyringPair, o types.SignatureOptions) error {
+	if e.Type() != types.ExtrinsicVersion4 {
+		return fmt.Errorf("unsupported extrinsic version: %v (isSigned: %v, type: %v)", e.Version, e.IsSigned(), e.Type())
+	}
+
+	mb, err := types.EncodeToBytes(e.Method)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("============== method: %v\n", mb)
+
+	era := o.Era
+	if !o.Era.IsMortalEra {
+		era = types.ExtrinsicEra{IsImmortalEra: true}
+	}
+
+	fmt.Printf("============== era: %v\n", era)
+	fmt.Printf("============== Nonce: %v\n", o.Nonce)
+	fmt.Printf("============== Tip: %v\n", o.Tip)
+	fmt.Printf("============== SpecVersion: %v\n", o.SpecVersion)
+	fmt.Printf("============== GenesisHash: %v\n", o.GenesisHash)
+	fmt.Printf("============== BlockHash: %v\n", o.BlockHash)
+	fmt.Printf("============== TransactionVersion: %v\n", o.TransactionVersion)
+
+	payload := types.ExtrinsicPayloadV4{
+		ExtrinsicPayloadV3: types.ExtrinsicPayloadV3{
+			Method:      mb,
+			Era:         era,
+			Nonce:       o.Nonce,
+			Tip:         o.Tip,
+			SpecVersion: o.SpecVersion,
+			GenesisHash: o.GenesisHash,
+			BlockHash:   o.BlockHash,
+		},
+		TransactionVersion: o.TransactionVersion,
+	}
+
+	b, err := types.EncodeToBytes(payload)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("============== payload: %v\n", b)
+
+return nil
 }
 
 func (c *Connection) watchSubmission(sub *author.ExtrinsicStatusSubscription) error {
@@ -212,6 +265,8 @@ func (c *Connection) checkChainId(expected msg.ChainId) error {
 }
 
 func (c *Connection) getLatestNonce() (types.U32, error) {
+	return 3, nil
+
 	var acct types.AccountInfo
 	exists, err := c.queryStorage("System", "Account", c.key.PublicKey, nil, &acct)
 	if err != nil {

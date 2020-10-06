@@ -60,7 +60,7 @@ func (p *proposal) encode() ([]byte, error) {
 
 func (w *writer) createFungibleProposal(m msg.Message) (*proposal, error) {
 	bigAmt := big.NewInt(0).SetBytes(m.Payload[0].([]byte))
-	amount := types.NewU128(*bigAmt)
+	amount := bigAmt.Uint64()
 	recipient := types.NewAccountID(m.Payload[1].([]byte))
 	depositNonce := types.U64(m.DepositNonce)
 
