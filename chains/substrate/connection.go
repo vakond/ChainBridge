@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/ChainSafe/ChainBridge/shared/equilibrium"
 	utils "github.com/ChainSafe/ChainBridge/shared/substrate"
 	"github.com/ChainSafe/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
@@ -265,9 +266,7 @@ func (c *Connection) checkChainId(expected msg.ChainId) error {
 }
 
 func (c *Connection) getLatestNonce() (types.U32, error) {
-	return 3, nil
-
-	var acct types.AccountInfo
+	var acct equilibrium.AccountInfo
 	exists, err := c.queryStorage("System", "Account", c.key.PublicKey, nil, &acct)
 	if err != nil {
 		return 0, err
