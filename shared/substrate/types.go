@@ -7,8 +7,8 @@ import (
 	"github.com/centrifuge/go-substrate-rpc-client/types"
 )
 
-const BridgePalletName = "ChainBridge"
-const BridgeStoragePrefix = "ChainBridge"
+const BridgePalletName = "Chainbridge"
+const BridgeStoragePrefix = "Chainbridge"
 
 type Erc721Token struct {
 	Id       types.U256
