@@ -20,7 +20,6 @@ var (
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
-	_ = abi.U256
 	_ = bind.Bind
 	_ = common.Big1
 	_ = types.BloomLookup
@@ -31,7 +30,7 @@ var (
 const OneArgumentABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"argumentOne\",\"type\":\"uint256\"}],\"name\":\"OneArgumentCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"argumentOne\",\"type\":\"uint256\"}],\"name\":\"oneArgument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // OneArgumentBin is the compiled bytecode used for deploying new contracts.
-var OneArgumentBin = "0x6080604052348015600f57600080fd5b5060be8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063c95cf0d814602d575b600080fd5b605660048036036020811015604157600080fd5b81019080803590602001909291905050506058565b005b807f29ab08c845830c69b55a1fba5c95718f65dc24361a471e3da14cd5ff2b37315960405160405180910390a25056fea2646970667358221220d962a586a2057384f435d8f9460c52f9ff4ec909dcd0bf3992c0987dce938ffe64736f6c63430006040033"
+var OneArgumentBin = "0x6080604052348015600f57600080fd5b5060be8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063c95cf0d814602d575b600080fd5b605660048036036020811015604157600080fd5b81019080803590602001909291905050506058565b005b807f29ab08c845830c69b55a1fba5c95718f65dc24361a471e3da14cd5ff2b37315960405160405180910390a25056fea26469706673582212207843aeb3eb8055f24d0cf1eec97b6aa6689d97d3ede837568f83c782d0cc9c5664736f6c63430006040033"
 
 // DeployOneArgument deploys a new Ethereum contract, binding an instance of OneArgument to it.
 func DeployOneArgument(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *OneArgument, error) {
