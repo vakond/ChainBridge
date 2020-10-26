@@ -126,10 +126,10 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 		TransactionVersion: 1,
 	}
 
-	err = printBinaryPayload(&ext, *c.key, o)
-	if err != nil {
-		return err
-	}
+	// err = printBinaryPayload(&ext, *c.key, o)
+	// if err != nil {
+	// 	return err
+	// }
 
 	err = ext.Sign(*c.key, o)
 	if err != nil {
@@ -194,7 +194,7 @@ func printBinaryPayload(e *types.Extrinsic, signer signature.KeyringPair, o type
 
 	fmt.Printf("============== payload: %v\n", b)
 
-return nil
+    return nil
 }
 
 func (c *Connection) watchSubmission(sub *author.ExtrinsicStatusSubscription) error {
