@@ -37,7 +37,7 @@ func wrapHandler(hdl func(*cli.Context, *dataHandler) error) cli.ActionFunc {
 
 		datadir, err := getDataDir(ctx)
 		if err != nil {
-			return fmt.Errorf("failed to access the datadir: %s", err)
+			return fmt.Errorf("failed to access the datadir: %w", err)
 		}
 
 		return hdl(ctx, &dataHandler{datadir: datadir})

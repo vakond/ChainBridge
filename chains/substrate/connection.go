@@ -95,7 +95,7 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 		args...,
 	)
 	if err != nil {
-		return fmt.Errorf("failed to construct call: %s", err.Error())
+		return fmt.Errorf("failed to construct call: %w", err)
 	}
 	ext := types.NewExtrinsic(call)
 
@@ -142,7 +142,7 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 	c.nonce++
 	c.nonceLock.Unlock()
 	if err != nil {
-		return fmt.Errorf("submission of extrinsic failed: %s", err.Error())
+		return fmt.Errorf("submission of extrinsic failed: %w", err)
 	}
 	c.log.Trace("Extrinsic submission succeeded")
 	defer sub.Unsubscribe()
