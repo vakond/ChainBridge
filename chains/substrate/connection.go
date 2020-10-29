@@ -117,12 +117,12 @@ func (c *Connection) SubmitTx(method utils.Method, args ...interface{}) error {
 
 	// Sign the extrinsic
 	o := types.SignatureOptions{
-		BlockHash:   c.genesisHash,
-		Era:         types.ExtrinsicEra{IsMortalEra: false},
-		GenesisHash: c.genesisHash,
-		Nonce:       types.NewUCompactFromUInt(uint64(c.nonce)),
-		SpecVersion: rv.SpecVersion,
-		Tip:         types.NewUCompactFromUInt(0),
+		BlockHash:          c.genesisHash,
+		Era:                types.ExtrinsicEra{IsMortalEra: false},
+		GenesisHash:        c.genesisHash,
+		Nonce:              types.NewUCompactFromUInt(uint64(c.nonce)),
+		SpecVersion:        rv.SpecVersion,
+		Tip:                types.NewUCompactFromUInt(0),
 		TransactionVersion: 1,
 	}
 
@@ -234,7 +234,7 @@ func (c *Connection) queryStorage(prefix, method string, arg1, arg2 []byte, resu
 
 // TODO: Add this to GSRPC
 func getConst(meta *types.Metadata, prefix, name string, res interface{}) error {
-	for _, mod := range meta.AsMetadataV11.Modules {
+	for _, mod := range meta.AsMetadataV12.Modules {
 		if string(mod.Name) == prefix {
 			for _, cons := range mod.Constants {
 				if string(cons.Name) == name {
