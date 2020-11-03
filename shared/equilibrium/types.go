@@ -12,5 +12,5 @@ import (
 // querying the storage.
 type AccountInfo struct {
 	Nonce    types.U32
-	Refcount types.U8
+	Refcount types.U32
 }
