@@ -30,8 +30,6 @@ keys/
 *.key
 
 # Chainbridge
-config.toml
-config.json
 *.block
 gethdata1/
 gethdata2/
